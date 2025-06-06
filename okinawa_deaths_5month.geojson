@@ -1,0 +1,725 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          128.0487851,
+          26.58192407
+        ]
+      },
+      "properties": {
+        "住所": "名護市",
+        "戦死者数": 787,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.9755598,
+          26.48177852
+        ]
+      },
+      "properties": {
+        "住所": "宜野座村",
+        "戦死者数": 131,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.926133,
+          26.45633442
+        ]
+      },
+      "properties": {
+        "住所": "金武町",
+        "戦死者数": 192,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          128.1201875,
+          26.70185993
+        ]
+      },
+      "properties": {
+        "住所": "大宜味村",
+        "戦死者数": 205,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          128.2424648,
+          26.74098861
+        ]
+      },
+      "properties": {
+        "住所": "国頭村",
+        "戦死者数": 271,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.8292539,
+          26.42713846
+        ]
+      },
+      "properties": {
+        "住所": "石川市",
+        "戦死者数": 77,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.8055629,
+          26.33443063
+        ]
+      },
+      "properties": {
+        "住所": "沖縄市",
+        "戦死者数": 121,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.7670236,
+          26.14447682
+        ]
+      },
+      "properties": {
+        "住所": "玉城村",
+        "戦死者数": 885,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.8211244,
+          26.17012768
+        ]
+      },
+      "properties": {
+        "住所": "知念村",
+        "戦死者数": 224,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.8574645,
+          26.37920548
+        ]
+      },
+      "properties": {
+        "住所": "具志川市",
+        "戦死者数": 72,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          128.1565869,
+          26.63328616
+        ]
+      },
+      "properties": {
+        "住所": "東村",
+        "戦死者数": 108,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.751107,
+          26.26879154
+        ]
+      },
+      "properties": {
+        "住所": "宜野湾市",
+        "戦死者数": 68,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.7896798,
+          26.26219348
+        ]
+      },
+      "properties": {
+        "住所": "中城村",
+        "戦死者数": 105,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.9729358,
+          26.68261699
+        ]
+      },
+      "properties": {
+        "住所": "今帰仁村",
+        "戦死者数": 109,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.8978974,
+          26.65777846
+        ]
+      },
+      "properties": {
+        "住所": "本部町",
+        "戦死者数": 82,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.6893848,
+          26.10485693
+        ]
+      },
+      "properties": {
+        "住所": "旧真壁村",
+        "戦死者数": 1831,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.6814715,
+          26.17723704
+        ]
+      },
+      "properties": {
+        "住所": "豊見城村",
+        "戦死者数": 918,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.7126949,
+          26.09371761
+        ]
+      },
+      "properties": {
+        "住所": "旧摩文仁村",
+        "戦死者数": 747,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.7870522,
+          26.16781745
+        ]
+      },
+      "properties": {
+        "住所": "佐敷町",
+        "戦死者数": 240,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.8535797,
+          26.49766484
+        ]
+      },
+      "properties": {
+        "住所": "恩納村",
+        "戦死者数": 218,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.7431714,
+          26.12192503
+        ]
+      },
+      "properties": {
+        "住所": "具志頭村",
+        "戦死者数": 881,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.7444883,
+          26.1761905
+        ]
+      },
+      "properties": {
+        "住所": "大里村",
+        "戦死者数": 1216,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.6824609,
+          26.0909077
+        ]
+      },
+      "properties": {
+        "住所": "旧喜屋武村",
+        "戦死者数": 494,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.6881549,
+          26.14383497
+        ]
+      },
+      "properties": {
+        "住所": "旧兼城村",
+        "戦死者数": 612,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.6691072,
+          26.18767376
+        ]
+      },
+      "properties": {
+        "住所": "小禄",
+        "戦死者数": 455,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.3643267,
+          26.19754734
+        ]
+      },
+      "properties": {
+        "住所": "渡嘉敷村",
+        "戦死者数": 20,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.7591517,
+          26.22291366
+        ]
+      },
+      "properties": {
+        "住所": "西原町",
+        "戦死者数": 609,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.7198131,
+          26.2195506
+        ]
+      },
+      "properties": {
+        "住所": "首里",
+        "戦死者数": 3265,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.8066272,
+          26.71340442
+        ]
+      },
+      "properties": {
+        "住所": "伊江村",
+        "戦死者数": 31,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.6929693,
+          26.1262865
+        ]
+      },
+      "properties": {
+        "住所": "旧高嶺村",
+        "戦死者数": 1211,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.6941033,
+          26.20680542
+        ]
+      },
+      "properties": {
+        "住所": "真和志",
+        "戦死者数": 1217,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.9050222,
+          26.33002605
+        ]
+      },
+      "properties": {
+        "住所": "与那城町",
+        "戦死者数": 12,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.897374,
+          26.31523704
+        ]
+      },
+      "properties": {
+        "住所": "勝連町",
+        "戦死者数": 17,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.670034,
+          26.1295228
+        ]
+      },
+      "properties": {
+        "住所": "旧糸満町",
+        "戦死者数": 85,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.6736677,
+          26.213577
+        ]
+      },
+      "properties": {
+        "住所": "旧那覇市",
+        "戦死者数": 119,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.7220559,
+          26.24605693
+        ]
+      },
+      "properties": {
+        "住所": "浦添市",
+        "戦死者数": 1528,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.8050305,
+          26.34070762
+        ]
+      },
+      "properties": {
+        "住所": "久米島",
+        "戦死者数": 7,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.7197499,
+          26.15850895
+        ]
+      },
+      "properties": {
+        "住所": "東風平町",
+        "戦死者数": 1299,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.7285411,
+          26.19116324
+        ]
+      },
+      "properties": {
+        "住所": "南風原町",
+        "戦死者数": 1352,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.7933559,
+          26.30093682
+        ]
+      },
+      "properties": {
+        "住所": "北中城村",
+        "戦死者数": 1,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.744482,
+          26.39621217
+        ]
+      },
+      "properties": {
+        "住所": "読谷村",
+        "戦死者数": 24,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.7546707,
+          26.19957753
+        ]
+      },
+      "properties": {
+        "住所": "与那原町",
+        "戦死者数": 250,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.7635006,
+          26.32042079
+        ]
+      },
+      "properties": {
+        "住所": "北谷町",
+        "戦死者数": 15,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.3034336,
+          26.22893537
+        ]
+      },
+      "properties": {
+        "住所": "座間味村",
+        "戦死者数": 9,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.1415468,
+          26.37235164
+        ]
+      },
+      "properties": {
+        "住所": "渡名喜村",
+        "戦死者数": 4,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.2290424,
+          26.58196829
+        ]
+      },
+      "properties": {
+        "住所": "粟国村",
+        "戦死者数": 13,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.9411146,
+          26.92380805
+        ]
+      },
+      "properties": {
+        "住所": "伊是名村",
+        "戦死者数": 1,
+        "月": "5月"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.7560658,
+          26.36190831
+        ]
+      },
+      "properties": {
+        "住所": "嘉手納町",
+        "戦死者数": 4,
+        "月": "5月"
+      }
+    }
+  ]
+}
