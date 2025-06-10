@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>沖縄戦 累積マップ</title>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
+  <style>
+    body { margin: 0; padding: 0; font-family: sans-serif; }
+    #map { position: absolute; top: 40px; bottom: 0; width: 100%; }
+    #controls {
+      position: absolute;
+      top: 5px;
+      left: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 5px 10px;
+      border-radius: 4px;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+<div id="controls">
+  表示月:
+  <select id="monthSelect">
+    <option value="all">全期間</option>
+    <option value="m03">3月</option>
+    <option value="m04">4月</option>
+    <option value="m05">5月</option>
+    <option value="m06">6月</option>
+    <option value="m07plus">7月以降</option>
+  </select>
+</div>
+<div id="map"></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoibmthbWltdXJhIiwiYSI6ImNtYmttZmFtaDBybzIyanB5YnJtd2d1bzUifQ.qE8Mw9_IdFq5ZMyM9SLKww';
+
+const monthOrder = ['m03', 'm04', 'm05', 'm06', 'm07plus'];
+
+const map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/satellite-v9',
+  center: [127.7, 26.2],
+  zoom: 7.5,
+  pitch: 45,
+  bearing: -17
+});
+
+map.on('load', () => {
+  fetch('https://k-naritoshi.github.io/okinawa-war-map/okinawa_war_deaths_cumulative_polygons_en.json')
+    .then(res => res.json())
+    .then(geojson => {
+      map.addSource('deaths', { type: 'geojson', data: geojson });
+
+      map.addLayer({
+        id: 'extrusions',
+        type: 'fill-extrusion',
+        source: 'deaths',
+        paint: {
+          'fill-extrusion-color': '#FF69B4',
+          'fill-extrusion-height': ['get', '高さ'],
+          'fill-extrusion-base': 0,
+          'fill-extrusion-opacity': 0.8
+        }
+      });
+
+      const select = document.getElementById('monthSelect');
+      select.addEventListener('change', () => updateExtrusion(select.value, geojson));
+
+      updateExtrusion('all', geojson);
+    });
+});
+
+function updateExtrusion(selectedMonth, geojson) {
+  const features = geojson.features.map(f => {
+    let height = 0;
+    if (selectedMonth === 'all') {
+      height = f.properties['累積_m07plus'] || 0;
+    } else {
+      const index = monthOrder.indexOf(selectedMonth);
+      if (index >= 0) {
+        const monthsToSum = monthOrder.slice(0, index + 1);
+        height = Math.max(...monthsToSum.map(m => f.properties[`累積_${m}`] || 0));
+      }
+    }
+    return { ...f, properties: { ...f.properties, 高さ: height } };
+  });
+
+  const updated = { ...geojson, features };
+  map.getSource('deaths').setData(updated);
+}
+</script>
+</body>
+</html>
