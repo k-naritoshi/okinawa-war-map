@@ -45,16 +45,8 @@
   </style>
 </head>
 <body>
-<div id="controls">
-  <label>表示月:
-    <select id="monthSelect">
-      <option value="m07plus" selected>7月以降</option>
-      <option value="m06">6月</option>
-      <option value="m05">5月</option>
-      <option value="m04">4月</option>
-      <option value="m03">3月</option>
-    </select>
-  </label>
+$1
+  <button id="toggleAnimation">⏯ 再生 / 停止</button>
   <label>地図スタイル:
     <select id="styleSelect">
       <option value="satellite" selected>衛星</option>
@@ -109,6 +101,7 @@ map.addControl(new mapboxgl.ScaleControl());
 const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false });
 let geojsonData;
 let animationInterval;
+let animationRunning = false;
 
 map.on('load', () => {
   fetch('https://k-naritoshi.github.io/okinawa-war-map/okinawa_war_deaths_monthly_bars.geojson')
@@ -163,6 +156,23 @@ map.on('load', () => {
       });
 
       updateLayers('m07plus');
+
+      document.getElementById('toggleAnimation').addEventListener('click', () => {
+        if (animationRunning) {
+          clearInterval(animationInterval);
+          animationRunning = false;
+        } else {
+          let index = 0;
+          animationInterval = setInterval(() => {
+            const month = monthOrder[index];
+            updateLayers(month);
+            document.getElementById('monthSelect').value = month;
+            map.flyTo({ center: [127.7, 26.2], zoom: 6.8, pitch: 45, bearing: -17 });
+            index = (index + 1) % monthOrder.length;
+          }, 2000);
+          animationRunning = true;
+        }
+      });
 
       map.on('mousemove', (e) => {
         const features = map.queryRenderedFeatures(e.point, {
