@@ -20,8 +20,9 @@
     }
     #legend {
       position: absolute;
-      bottom: 10px;
+      top: 50%;
       right: 10px;
+      transform: translateY(-50%);
       background: rgba(255, 255, 255, 0.95);
       padding: 6px 10px;
       border-radius: 4px;
@@ -100,7 +101,7 @@ const map = new mapboxgl.Map({
   container: 'map',
   style: styleList.satellite,
   center: [127.7, 26.2],
-  zoom: 9.0,
+  zoom: 11.0,
   pitch: 45,
   bearing: -17
 });
