@@ -7,7 +7,7 @@
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
   <style>
     body { margin: 0; padding: 0; font-family: sans-serif; }
-    #map { position: absolute; top: 40px; bottom: 0; width: 100%; }
+    #map { position: absolute; top: 80px; bottom: 0; width: 100%; }
     #controls {
       position: absolute;
       top: 5px;
@@ -17,18 +17,28 @@
       border-radius: 4px;
       z-index: 1;
     }
+    #controls label {
+      margin-right: 6px;
+    }
   </style>
 </head>
 <body>
 <div id="controls">
-  表示月:
-  <select id="monthSelect">
-    <option value="m07plus" selected>7月以降</option>
-    <option value="m06">6月</option>
-    <option value="m05">5月</option>
-    <option value="m04">4月</option>
-    <option value="m03">3月</option>
-  </select>
+  <label>表示月:
+    <select id="monthSelect">
+      <option value="m07plus" selected>7月以降</option>
+      <option value="m06">6月</option>
+      <option value="m05">5月</option>
+      <option value="m04">4月</option>
+      <option value="m03">3月</option>
+    </select>
+  </label>
+  <label>地図スタイル:
+    <select id="styleSelect">
+      <option value="satellite" selected>衛星</option>
+      <option value="streets">通常地図</option>
+    </select>
+  </label>
 </div>
 <div id="map"></div>
 <script>
@@ -36,21 +46,31 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibmthbWltdXJhIiwiYSI6ImNtYmttZmFtaDBybzIyanB5Y
 
 const monthOrder = ['m03', 'm04', 'm05', 'm06', 'm07plus'];
 const opacityByMonth = {
-  m03: 1,
-  m04: 0.5,
+  m03: 1.0,
+  m04: 0.7,
   m05: 0.65,
   m06: 0.75,
   m07plus: 1.0
 };
 
+const styleList = {
+  satellite: 'mapbox://styles/mapbox/satellite-v9',
+  streets: 'mapbox://styles/mapbox/streets-v12'
+};
+
 const map = new mapboxgl.Map({
   container: 'map',
-  style: 'mapbox://styles/mapbox/satellite-v9',
+  style: styleList.satellite,
   center: [127.7, 26.2],
   zoom: 7.5,
   pitch: 45,
   bearing: -17
 });
+
+map.addControl(new mapboxgl.NavigationControl());
+map.addControl(new mapboxgl.ScaleControl());
+
+const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false });
 
 map.on('load', () => {
   fetch('https://k-naritoshi.github.io/okinawa-war-map/okinawa_war_deaths_monthly_bars.geojson')
@@ -74,9 +94,53 @@ map.on('load', () => {
         });
       }
 
-      const select = document.getElementById('monthSelect');
-      select.addEventListener('change', () => updateLayers(select.value));
+      document.getElementById('monthSelect').addEventListener('change', (e) => {
+        updateLayers(e.target.value);
+      });
+
+      document.getElementById('styleSelect').addEventListener('change', (e) => {
+        const selectedStyle = e.target.value;
+        map.setStyle(styleList[selectedStyle]);
+        map.once('style.load', () => {
+          map.addSource('deaths', { type: 'geojson', data: geojson });
+          for (const month of monthOrder) {
+            map.addLayer({
+              id: `extrusion-${month}`,
+              type: 'fill-extrusion',
+              source: 'deaths',
+              filter: ['==', ['get', '月'], month],
+              layout: { visibility: 'none' },
+              paint: {
+                'fill-extrusion-color': ['get', '色'],
+                'fill-extrusion-height': ['get', '高さ'],
+                'fill-extrusion-base': ['get', 'ベース'],
+                'fill-extrusion-opacity': opacityByMonth[month] || 0.85
+              }
+            });
+          }
+          updateLayers(document.getElementById('monthSelect').value);
+        });
+      });
+
       updateLayers('m07plus');
+
+      map.on('mousemove', (e) => {
+        const features = map.queryRenderedFeatures(e.point, {
+          layers: monthOrder.map(m => `extrusion-${m}`)
+        });
+
+        if (features.length > 0) {
+          const f = features[0];
+          const html = `
+            <strong>${f.properties.住所}</strong><br>
+            月: ${f.properties.月}<br>
+            人数: ${f.properties.高さ}
+          `;
+          popup.setLngLat(e.lngLat).setHTML(html).addTo(map);
+        } else {
+          popup.remove();
+        }
+      });
     });
 });
 
