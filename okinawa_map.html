@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>沖縄戦 累積マップ</title>
+  <title>沖縄戦 死亡者月別積み上げ 3Dマップ</title>
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
   <style>
@@ -35,14 +35,6 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoibmthbWltdXJhIiwiYSI6ImNtYmttZmFtaDBybzIyanB5YnJtd2d1bzUifQ.qE8Mw9_IdFq5ZMyM9SLKww';
 
 const monthOrder = ['m03', 'm04', 'm05', 'm06', 'm07plus'];
-const monthColors = {
-  m03: '#FFD700',     // gold
-  m04: '#1E90FF',     // dodgerblue
-  m05: '#32CD32',     // limegreen
-  m06: '#00CED1',     // darkturquoise
-  m07plus: '#800080'  // purple
-};
-
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/satellite-v9',
@@ -53,51 +45,41 @@ const map = new mapboxgl.Map({
 });
 
 map.on('load', () => {
-  fetch('https://k-naritoshi.github.io/okinawa-war-map/okinawa_war_deaths_cumulative_polygons_en.json')
+  fetch('https://k-naritoshi.github.io/okinawa-war-map/okinawa_war_deaths_monthly_bars.geojson')
     .then(res => res.json())
     .then(geojson => {
       map.addSource('deaths', { type: 'geojson', data: geojson });
 
-      map.addLayer({
-        id: 'extrusions',
-        type: 'fill-extrusion',
-        source: 'deaths',
-        paint: {
-          'fill-extrusion-color': [
-            'match', ['get', '表示月'],
-            'm03', '#FFD700',
-            'm04', '#1E90FF',
-            'm05', '#32CD32',
-            'm06', '#00CED1',
-            'm07plus', '#800080',
-            '#FF69B4'
-          ],
-          'fill-extrusion-height': ['get', '高さ'],
-          'fill-extrusion-base': 0,
-          'fill-extrusion-opacity': 0.8
-        }
-      });
+      for (const month of monthOrder) {
+        map.addLayer({
+          id: `extrusion-${month}`,
+          type: 'fill-extrusion',
+          source: 'deaths',
+          filter: ['==', ['get', '月'], month],
+          layout: { visibility: 'none' },
+          paint: {
+            'fill-extrusion-color': ['get', '色'],
+            'fill-extrusion-height': ['get', '高さ'],
+            'fill-extrusion-base': ['get', 'ベース'],
+            'fill-extrusion-opacity': 0.85
+          }
+        });
+      }
 
       const select = document.getElementById('monthSelect');
-      select.addEventListener('change', () => updateExtrusion(select.value, geojson));
-
-      updateExtrusion('m07plus', geojson);
+      select.addEventListener('change', () => updateLayers(select.value));
+      updateLayers('m07plus');
     });
 });
 
-function updateExtrusion(selectedMonth, geojson) {
-  const features = geojson.features.map(f => {
-    let height = 0;
-    const index = monthOrder.indexOf(selectedMonth);
-    if (index >= 0) {
-      const monthsToSum = monthOrder.slice(0, index + 1);
-      height = Math.max(...monthsToSum.map(m => f.properties[`累積_${m}`] || 0));
+function updateLayers(selectedMonth) {
+  const idx = monthOrder.indexOf(selectedMonth);
+  monthOrder.forEach((m, i) => {
+    const visibility = i <= idx ? 'visible' : 'none';
+    if (map.getLayer(`extrusion-${m}`)) {
+      map.setLayoutProperty(`extrusion-${m}`, 'visibility', visibility);
     }
-    return { ...f, properties: { ...f.properties, 高さ: height, 表示月: selectedMonth } };
   });
-
-  const updated = { ...geojson, features };
-  map.getSource('deaths').setData(updated);
 }
 </script>
 </body>
