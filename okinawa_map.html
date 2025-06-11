@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>沖縄戦 死亡者月別積み上げ 3Dマップ</title>
+  <title>沖縄戦 月別積み上げマップ</title>
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
   <style>
@@ -195,6 +195,7 @@ map.on('load', () => {
       });
 
       // アニメーション初期起動なし（ボタン制御に一本化）
+  });
 });
 
 function updateLayers(selectedMonth) {
