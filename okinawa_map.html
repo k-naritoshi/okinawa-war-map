@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>沖縄戦 死亡者月別積み上げ 3Dマップ</title>
+  <title>沖縄戦 月別積み上げ 3Dマップ</title>
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
   <style>
@@ -35,6 +35,14 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoibmthbWltdXJhIiwiYSI6ImNtYmttZmFtaDBybzIyanB5YnJtd2d1bzUifQ.qE8Mw9_IdFq5ZMyM9SLKww';
 
 const monthOrder = ['m03', 'm04', 'm05', 'm06', 'm07plus'];
+const opacityByMonth = {
+  m03: 0.4,
+  m04: 0.5,
+  m05: 0.65,
+  m06: 0.75,
+  m07plus: 1.0
+};
+
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/satellite-v9',
@@ -61,7 +69,7 @@ map.on('load', () => {
             'fill-extrusion-color': ['get', '色'],
             'fill-extrusion-height': ['get', '高さ'],
             'fill-extrusion-base': ['get', 'ベース'],
-            'fill-extrusion-opacity': 0.85
+            'fill-extrusion-opacity': opacityByMonth[month] || 0.85
           }
         });
       }
