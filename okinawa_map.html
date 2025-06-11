@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>沖縄戦 月別積み上げ 3Dマップ</title>
+  <title>沖縄戦 死亡者月別積み上げ 3Dマップ</title>
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
   <style>
@@ -45,9 +45,16 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoibmthbWltdXJhIiwiYSI6ImNtYmttZmFtaDBybzIyanB5YnJtd2d1bzUifQ.qE8Mw9_IdFq5ZMyM9SLKww';
 
 const monthOrder = ['m03', 'm04', 'm05', 'm06', 'm07plus'];
+const monthLabels = {
+  m03: '3月',
+  m04: '4月',
+  m05: '5月',
+  m06: '6月',
+  m07plus: '7月以降'
+};
 const opacityByMonth = {
   m03: 1.0,
-  m04: 0.7,
+  m04: 0.8,
   m05: 0.65,
   m06: 0.75,
   m07plus: 1.0
@@ -131,10 +138,20 @@ map.on('load', () => {
 
         if (features.length > 0) {
           const f = features[0];
+          const month = f.properties.月;
+          const current = f.properties.高さ;
+
+          let cumulative = 0;
+          for (const m of monthOrder) {
+            if (f.properties.月 === m) break;
+            cumulative += f.properties.高さ;
+          }
+
           const html = `
             <strong>${f.properties.住所}</strong><br>
-            月: ${f.properties.月}<br>
-            人数: ${f.properties.高さ}
+            月: ${monthLabels[month]}<br>
+            人数（当月）: ${current}<br>
+            累計人数: ${f.properties.ベース + current}
           `;
           popup.setLngLat(e.lngLat).setHTML(html).addTo(map);
         } else {
