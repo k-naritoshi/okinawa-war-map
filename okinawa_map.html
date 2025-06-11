@@ -46,7 +46,7 @@
 </head>
 <body>
 $1
-  <button id="toggleAnimation">⏯ 再生 / 停止</button>
+  <button id="toggleAnimation">再生 / 停止</button>
   <label>地図スタイル:
     <select id="styleSelect">
       <option value="satellite" selected>衛星</option>
@@ -195,6 +195,7 @@ map.on('load', () => {
       });
 
       // アニメーション初期起動なし（ボタン制御に一本化）
+    });
   });
 });
 
