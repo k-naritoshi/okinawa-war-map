@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>沖縄戦月別積み上げマップ</title>
+  <title>沖縄戦 月別積み上げマップ</title>
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
   <style>
@@ -45,7 +45,7 @@
   </style>
 </head>
 <body>
->>
+$1
   <button id="toggleAnimation">⏯ 再生 / 停止</button>
   <label>地図スタイル:
     <select id="styleSelect">
@@ -155,6 +155,47 @@ map.on('load', () => {
           updateLayers(document.getElementById('monthSelect').value);
         });
       });
+
+      updateLayers('m07plus');
+
+      document.getElementById('toggleAnimation').addEventListener('click', () => {
+        if (animationRunning) {
+          clearInterval(animationInterval);
+          animationRunning = false;
+        } else {
+          let index = 0;
+          animationInterval = setInterval(() => {
+            const month = monthOrder[index];
+            updateLayers(month);
+            document.getElementById('monthSelect').value = month;
+            map.flyTo({ center: [127.7, 26.2], zoom: 6.8, pitch: 45, bearing: -17 });
+            index = (index + 1) % monthOrder.length;
+          }, 2000);
+          animationRunning = true;
+        }
+      });
+
+      map.on('mousemove', (e) => {
+        const features = map.queryRenderedFeatures(e.point, {
+          layers: monthOrder.map(m => `extrusion-${m}`)
+        });
+
+        if (features.length > 0) {
+          const f = features[0];
+          const label = monthLabels[f.properties.月] || f.properties.月;
+          const html = `
+            <strong>${f.properties.住所}</strong><br>
+            月: ${label}<br>
+            人数（当月）: ${f.properties.高さ}<br>
+            累計人数: ${f.properties.ベース + f.properties.高さ}
+          `;
+          popup.setLngLat(e.lngLat).setHTML(html).addTo(map);
+        } else {
+          popup.remove();
+        }
+      });
+    });
+});
 
       updateLayers('m07plus');
 
