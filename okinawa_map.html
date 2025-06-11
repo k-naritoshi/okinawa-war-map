@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>沖縄戦 死亡者累積 3Dマップ</title>
+  <title>沖縄戦 累積マップ</title>
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
   <style>
@@ -63,7 +63,15 @@ map.on('load', () => {
         type: 'fill-extrusion',
         source: 'deaths',
         paint: {
-          'fill-extrusion-color': ['get', '色'],
+          'fill-extrusion-color': [
+            'match', ['get', '表示月'],
+            'm03', '#FFD700',
+            'm04', '#1E90FF',
+            'm05', '#32CD32',
+            'm06', '#00CED1',
+            'm07plus', '#800080',
+            '#FF69B4'
+          ],
           'fill-extrusion-height': ['get', '高さ'],
           'fill-extrusion-base': 0,
           'fill-extrusion-opacity': 0.8
@@ -85,8 +93,7 @@ function updateExtrusion(selectedMonth, geojson) {
       const monthsToSum = monthOrder.slice(0, index + 1);
       height = Math.max(...monthsToSum.map(m => f.properties[`累積_${m}`] || 0));
     }
-    const color = monthColors[selectedMonth] || '#FF69B4';
-    return { ...f, properties: { ...f.properties, 高さ: height, 色: color } };
+    return { ...f, properties: { ...f.properties, 高さ: height, 表示月: selectedMonth } };
   });
 
   const updated = { ...geojson, features };
