@@ -71,19 +71,10 @@
   <div class="legend-item"><div class="legend-color" style="background:#800080"></div>7月以降</div>
 </div>
 <div id="map"></div>
-
-
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoibmthbWltdXJhIiwiYSI6ImNtYmttZmFtaDBybzIyanB5YnJtd2d1bzUifQ.qE8Mw9_IdFq5ZMyM9SLKww';
 
 const monthOrder = ['m03', 'm04', 'm05', 'm06', 'm07plus'];
-const monthLabels = {
-  m03: '3月',
-  m04: '4月',
-  m05: '5月',
-  m06: '6月',
-  m07plus: '7月以降'
-};
 const opacityByMonth = {
   m03: 1.0,
   m04: 0.8,
@@ -91,7 +82,13 @@ const opacityByMonth = {
   m06: 0.75,
   m07plus: 1.0
 };
-
+const monthLabels = {
+  m03: '3月',
+  m04: '4月',
+  m05: '5月',
+  m06: '6月',
+  m07plus: '7月以降'
+};
 const styleList = {
   satellite: 'mapbox://styles/mapbox/satellite-v9',
   streets: 'mapbox://styles/mapbox/streets-v12'
@@ -101,7 +98,7 @@ const map = new mapboxgl.Map({
   container: 'map',
   style: styleList.satellite,
   center: [127.7, 26.2],
-  zoom: 11.0,
+  zoom: 10.5,
   pitch: 45,
   bearing: -17
 });
@@ -110,11 +107,14 @@ map.addControl(new mapboxgl.NavigationControl());
 map.addControl(new mapboxgl.ScaleControl());
 
 const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false });
+let geojsonData;
+let animationInterval;
 
 map.on('load', () => {
   fetch('https://k-naritoshi.github.io/okinawa-war-map/okinawa_war_deaths_monthly_bars.geojson')
     .then(res => res.json())
     .then(geojson => {
+      geojsonData = geojson;
       map.addSource('deaths', { type: 'geojson', data: geojson });
 
       for (const month of monthOrder) {
@@ -135,13 +135,14 @@ map.on('load', () => {
 
       document.getElementById('monthSelect').addEventListener('change', (e) => {
         updateLayers(e.target.value);
+        clearInterval(animationInterval);
       });
 
       document.getElementById('styleSelect').addEventListener('change', (e) => {
         const selectedStyle = e.target.value;
         map.setStyle(styleList[selectedStyle]);
         map.once('style.load', () => {
-          map.addSource('deaths', { type: 'geojson', data: geojson });
+          map.addSource('deaths', { type: 'geojson', data: geojsonData });
           for (const month of monthOrder) {
             map.addLayer({
               id: `extrusion-${month}`,
@@ -170,26 +171,27 @@ map.on('load', () => {
 
         if (features.length > 0) {
           const f = features[0];
-          const month = f.properties.月;
-          const current = f.properties.高さ;
-
-          let cumulative = 0;
-          for (const m of monthOrder) {
-            if (f.properties.月 === m) break;
-            cumulative += f.properties.高さ;
-          }
-
+          const label = monthLabels[f.properties.月] || f.properties.月;
           const html = `
             <strong>${f.properties.住所}</strong><br>
-            月: ${monthLabels[month]}<br>
-            人数（当月）: ${current}<br>
-            累計人数: ${f.properties.ベース + current}
+            月: ${label}<br>
+            人数（当月）: ${f.properties.高さ}<br>
+            累計人数: ${f.properties.ベース + f.properties.高さ}
           `;
           popup.setLngLat(e.lngLat).setHTML(html).addTo(map);
         } else {
           popup.remove();
         }
       });
+
+      // アニメーション切り替え
+      let index = 0;
+      animationInterval = setInterval(() => {
+        const month = monthOrder[index];
+        updateLayers(month);
+        document.getElementById('monthSelect').value = month;
+        index = (index + 1) % monthOrder.length;
+      }, 3000);
     });
 });
 
@@ -202,6 +204,7 @@ function updateLayers(selectedMonth) {
     }
   });
 }
+</script>
 </script>
 </body>
 </html>
