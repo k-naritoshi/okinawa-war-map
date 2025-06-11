@@ -61,6 +61,7 @@
   </label>
 </div>
 <div id="legend">
+  <strong>月別戦死場所の推移</strong><br>
   <div class="legend-item"><div class="legend-color" style="background:#FFD700"></div>3月</div>
   <div class="legend-item"><div class="legend-color" style="background:#1E90FF"></div>4月</div>
   <div class="legend-item"><div class="legend-color" style="background:#32CD32"></div>5月</div>
@@ -68,6 +69,7 @@
   <div class="legend-item"><div class="legend-color" style="background:#800080"></div>7月以降</div>
 </div>
 <div id="map"></div>
+
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoibmthbWltdXJhIiwiYSI6ImNtYmttZmFtaDBybzIyanB5YnJtd2d1bzUifQ.qE8Mw9_IdFq5ZMyM9SLKww';
@@ -97,7 +99,7 @@ const map = new mapboxgl.Map({
   container: 'map',
   style: styleList.satellite,
   center: [127.7, 26.2],
-  zoom: 6.8,
+  zoom: 20.0,
   pitch: 45,
   bearing: -17
 });
