@@ -17,8 +17,27 @@
       border-radius: 4px;
       z-index: 1;
     }
-    #controls label {
+    #legend {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 5px 10px;
+      border-radius: 4px;
+      z-index: 1;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .legend-color {
+      width: 14px;
+      height: 14px;
       margin-right: 6px;
+      border-radius: 2px;
     }
   </style>
 </head>
@@ -39,6 +58,13 @@
       <option value="streets">通常地図</option>
     </select>
   </label>
+</div>
+<div id="legend">
+  <div class="legend-item"><div class="legend-color" style="background:#FFD700"></div>3月</div>
+  <div class="legend-item"><div class="legend-color" style="background:#1E90FF"></div>4月</div>
+  <div class="legend-item"><div class="legend-color" style="background:#32CD32"></div>5月</div>
+  <div class="legend-item"><div class="legend-color" style="background:#00CED1"></div>6月</div>
+  <div class="legend-item"><div class="legend-color" style="background:#800080"></div>7月以降</div>
 </div>
 <div id="map"></div>
 <script>
