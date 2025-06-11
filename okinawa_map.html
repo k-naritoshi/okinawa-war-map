@@ -194,15 +194,7 @@ map.on('load', () => {
         }
       });
 
-      // アニメーション切り替え
-      let index = 0;
-      animationInterval = setInterval(() => {
-        const month = monthOrder[index];
-        updateLayers(month);
-        document.getElementById('monthSelect').value = month;
-        index = (index + 1) % monthOrder.length;
-      }, 3000);
-    });
+      // アニメーション初期起動なし（ボタン制御に一本化）
 });
 
 function updateLayers(selectedMonth) {
@@ -214,7 +206,6 @@ function updateLayers(selectedMonth) {
     }
   });
 }
-</script>
 </script>
 </body>
 </html>
