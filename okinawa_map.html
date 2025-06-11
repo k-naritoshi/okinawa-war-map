@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>沖縄戦 月別積み上げマップ</title>
+  <title>沖縄戦月別積み上げマップ</title>
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
   <style>
@@ -45,8 +45,8 @@
   </style>
 </head>
 <body>
-$1
-  <button id="toggleAnimation">再生 / 停止</button>
+>>
+  <button id="toggleAnimation">⏯ 再生 / 停止</button>
   <label>地図スタイル:
     <select id="styleSelect">
       <option value="satellite" selected>衛星</option>
@@ -129,6 +129,7 @@ map.on('load', () => {
       document.getElementById('monthSelect').addEventListener('change', (e) => {
         updateLayers(e.target.value);
         clearInterval(animationInterval);
+        animationRunning = false;
       });
 
       document.getElementById('styleSelect').addEventListener('change', (e) => {
@@ -193,10 +194,8 @@ map.on('load', () => {
           popup.remove();
         }
       });
-
-      // アニメーション初期起動なし（ボタン制御に一本化）
     });
-  });
+});
 });
 
 function updateLayers(selectedMonth) {
