@@ -51,20 +51,17 @@ document.getElementById('getViewBtn').addEventListener('click', () => {
 });
 
 
-document.getElementById('getViewBtn')?.addEventListener('click', function () {
+document.getElementById('getViewBtn')?.addEventListener('click', () => {
   const center = map.getCenter();
   const zoom = map.getZoom();
   const pitch = map.getPitch();
   const bearing = map.getBearing();
-  const msg = "center: [" + center.lng.toFixed(6) + ", " + center.lat.toFixed(6) + "], zoom: " + zoom.toFixed(2) + ", pitch: " + pitch.toFixed(1) + ", bearing: " + bearing.toFixed(1);
-  const el = document.getElementById('mapSettings');
-  if (el) {
-    el.textContent = msg;
-    el.style.whiteSpace = 'pre-wrap';
-    alert("地図設定を表示しました。コピーしてください。");
-  }
-});
-});
+
+  const msg = `center: [${center.lng.toFixed(6)}, ${center.lat.toFixed(6)}],\nzoom: ${zoom.toFixed(2)},\npitch: ${pitch.toFixed(1)},\nbearing: ${bearing.toFixed(1)}`;
+  console.log(msg);
+
+  navigator.clipboard.writeText(msg).then(() => {
+    alert('現在の地図設定をクリップボードにコピーしました！\n\n' + msg);
   }).catch(() => {
     alert('クリップボードへのコピーに失敗しました。ブラウザの設定をご確認ください。');
   });
@@ -178,7 +175,6 @@ document.getElementById('getViewBtn')?.addEventListener('click', function () {
   <div class="legend-item"><div class="legend-color" style="background:#800080"></div>7月以降</div>
 </div>
 <div id="map"></div>
-<div id="mapSettings" style="margin-top:10px;font-family:monospace;"></div>
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoibmthbWltdXJhIiwiYSI6ImNtYmttZmFtaDBybzIyanB5YnJtd2d1bzUifQ.qE8Mw9_IdFq5ZMyM9SLKww';
 
@@ -349,20 +345,17 @@ document.getElementById('getViewBtn').addEventListener('click', () => {
 });
 
 
-document.getElementById('getViewBtn')?.addEventListener('click', function () {
+document.getElementById('getViewBtn')?.addEventListener('click', () => {
   const center = map.getCenter();
   const zoom = map.getZoom();
   const pitch = map.getPitch();
   const bearing = map.getBearing();
-  const msg = "center: [" + center.lng.toFixed(6) + ", " + center.lat.toFixed(6) + "], zoom: " + zoom.toFixed(2) + ", pitch: " + pitch.toFixed(1) + ", bearing: " + bearing.toFixed(1);
-  const el = document.getElementById('mapSettings');
-  if (el) {
-    el.textContent = msg;
-    el.style.whiteSpace = 'pre-wrap';
-    alert("地図設定を表示しました。コピーしてください。");
-  }
-});
-});
+
+  const msg = `center: [${center.lng.toFixed(6)}, ${center.lat.toFixed(6)}],\nzoom: ${zoom.toFixed(2)},\npitch: ${pitch.toFixed(1)},\nbearing: ${bearing.toFixed(1)}`;
+  console.log(msg);
+
+  navigator.clipboard.writeText(msg).then(() => {
+    alert('現在の地図設定をクリップボードにコピーしました！\n\n' + msg);
   }).catch(() => {
     alert('クリップボードへのコピーに失敗しました。ブラウザの設定をご確認ください。');
   });
