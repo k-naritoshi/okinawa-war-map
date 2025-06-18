@@ -35,11 +35,26 @@ document.getElementById('playAnimationBtn').addEventListener('click', () => {
   showNextMonth();
 });
 
+
+document.getElementById('getViewBtn').addEventListener('click', () => {
+  const center = map.getCenter();
+  const zoom = map.getZoom();
+  const pitch = map.getPitch();
+  const bearing = map.getBearing();
+
+  const msg = `center: [${center.lng.toFixed(6)}, ${center.lat.toFixed(6)}],\nzoom: ${zoom.toFixed(2)},\npitch: ${pitch.toFixed(1)},\nbearing: ${bearing.toFixed(1)}`;
+  console.log(msg);
+
+  navigator.clipboard.writeText(msg).then(() => {
+    alert('現在の地図設定をクリップボードにコピーしました！\n\n' + msg);
+  });
+});
+
 </script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
   <style>
-    body { margin: 0; padding: 0; font-family: sans-serif; }
-    #map { position: relative; width: 100%; height: 600px; }
+    body { margin: 0; padding: 0; font-family: sans-serif; position: relative; }
+    #map { position: relative; width: 100%; max-width: 100%; height: 600px; }
     #controls {
       position: absolute;
       top: 5px;
@@ -123,6 +138,7 @@ document.getElementById('playAnimationBtn').addEventListener('click', () => {
       <option value="m03">3月</option>
     </select>
   </label>
+  <button id="getViewBtn">📍現在の地図設定を取得</button>
   
   <label>地図スタイル:
     <select id="styleSelect">
@@ -130,6 +146,7 @@ document.getElementById('playAnimationBtn').addEventListener('click', () => {
       <option value="streets">通常地図</option>
     </select>
   </label>
+  <button id="getViewBtn">📍現在の地図設定を取得</button>
   <button id="playAnimationBtn">▶️アニメーション再生</button>
 </div>
 <div id="legend">
@@ -293,6 +310,21 @@ document.getElementById('playAnimationBtn').addEventListener('click', () => {
   });
 
   showNextMonth();
+});
+
+
+document.getElementById('getViewBtn').addEventListener('click', () => {
+  const center = map.getCenter();
+  const zoom = map.getZoom();
+  const pitch = map.getPitch();
+  const bearing = map.getBearing();
+
+  const msg = `center: [${center.lng.toFixed(6)}, ${center.lat.toFixed(6)}],\nzoom: ${zoom.toFixed(2)},\npitch: ${pitch.toFixed(1)},\nbearing: ${bearing.toFixed(1)}`;
+  console.log(msg);
+
+  navigator.clipboard.writeText(msg).then(() => {
+    alert('現在の地図設定をクリップボードにコピーしました！\n\n' + msg);
+  });
 });
 
 </script>
