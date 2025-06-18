@@ -51,14 +51,19 @@ document.getElementById('getViewBtn').addEventListener('click', () => {
 });
 
 
-document.getElementById('getViewBtn')?.addEventListener('click', () => {
+document.getElementById('getViewBtn')?.addEventListener('click', function () {
   const center = map.getCenter();
   const zoom = map.getZoom();
   const pitch = map.getPitch();
   const bearing = map.getBearing();
-  const msg = `center: [${center.lng.toFixed(6)}, ${center.lat.toFixed(6)}], zoom: ${zoom.toFixed(2)}, pitch: ${pitch.toFixed(1)}, bearing: ${bearing.toFixed(1)}`;
-  document.getElementById('mapSettings').textContent = msg;
-  alert("地図設定を表示しました。コピーしてください。");
+  const msg = "center: [" + center.lng.toFixed(6) + ", " + center.lat.toFixed(6) + "], zoom: " + zoom.toFixed(2) + ", pitch: " + pitch.toFixed(1) + ", bearing: " + bearing.toFixed(1);
+  const el = document.getElementById('mapSettings');
+  if (el) {
+    el.textContent = msg;
+    el.style.whiteSpace = 'pre-wrap';
+    alert("地図設定を表示しました。コピーしてください。");
+  }
+});
 });
   }).catch(() => {
     alert('クリップボードへのコピーに失敗しました。ブラウザの設定をご確認ください。');
@@ -344,14 +349,19 @@ document.getElementById('getViewBtn').addEventListener('click', () => {
 });
 
 
-document.getElementById('getViewBtn')?.addEventListener('click', () => {
+document.getElementById('getViewBtn')?.addEventListener('click', function () {
   const center = map.getCenter();
   const zoom = map.getZoom();
   const pitch = map.getPitch();
   const bearing = map.getBearing();
-  const msg = `center: [${center.lng.toFixed(6)}, ${center.lat.toFixed(6)}], zoom: ${zoom.toFixed(2)}, pitch: ${pitch.toFixed(1)}, bearing: ${bearing.toFixed(1)}`;
-  document.getElementById('mapSettings').textContent = msg;
-  alert("地図設定を表示しました。コピーしてください。");
+  const msg = "center: [" + center.lng.toFixed(6) + ", " + center.lat.toFixed(6) + "], zoom: " + zoom.toFixed(2) + ", pitch: " + pitch.toFixed(1) + ", bearing: " + bearing.toFixed(1);
+  const el = document.getElementById('mapSettings');
+  if (el) {
+    el.textContent = msg;
+    el.style.whiteSpace = 'pre-wrap';
+    alert("地図設定を表示しました。コピーしてください。");
+  }
+});
 });
   }).catch(() => {
     alert('クリップボードへのコピーに失敗しました。ブラウザの設定をご確認ください。');
