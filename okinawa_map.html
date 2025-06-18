@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,27 +7,26 @@
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js">
 document.getElementById('playAnimationBtn').addEventListener('click', () => {
   let currentIndex = 0;
-  let currentBearing = map.getBearing(); // 現在の角度取得
+  const monthLabelEl = document.getElementById('monthLabel');
 
   function showNextMonth() {
-    if (currentIndex >= monthOrder.length) return;
+    if (currentIndex >= monthOrder.length) {
+      monthLabelEl.textContent = ''; // 終了時非表示
+      return;
+    }
 
     const month = monthOrder[currentIndex];
     if (map.getLayer(`extrusion-${month}`)) {
       map.setLayoutProperty(`extrusion-${month}`, 'visibility', 'visible');
     }
 
-    // 回転：10度ずつ回す
-    currentBearing += 10;
-    map.rotateTo(currentBearing, { duration: 1000 });
+    monthLabelEl.textContent = monthLabels[month] || month;
 
     currentIndex++;
-    if (currentIndex < monthOrder.length) {
-      setTimeout(showNextMonth, 1000);
-    }
+    setTimeout(showNextMonth, 1000);
   }
 
-  // 一旦すべて非表示にしてから開始
+  // 全レイヤー非表示からスタート
   monthOrder.forEach(m => {
     if (map.getLayer(`extrusion-${m}`)) {
       map.setLayoutProperty(`extrusion-${m}`, 'visibility', 'none');
@@ -75,6 +75,23 @@ document.getElementById('playAnimationBtn').addEventListener('click', () => {
       border-radius: 2px;
     }
   </style>
+
+<style>
+  #monthLabel {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    background: rgba(255,255,255,0.85);
+    padding: 4px 12px;
+    border-radius: 8px;
+    z-index: 999;
+    font-weight: bold;
+  }
+</style>
+<div id="monthLabel"></div>
+
 </head>
 <body>
 <div id="controls">
@@ -94,7 +111,6 @@ document.getElementById('playAnimationBtn').addEventListener('click', () => {
       <option value="streets">通常地図</option>
     </select>
   </label>
-  <button id="playAnimationBtn">▶️アニメーション再生</button>
 </div>
 <div id="legend">
   <strong>月別戦死場所の推移</strong><br>
@@ -230,27 +246,26 @@ function updateLayers(selectedMonth) {
 
 document.getElementById('playAnimationBtn').addEventListener('click', () => {
   let currentIndex = 0;
-  let currentBearing = map.getBearing(); // 現在の角度取得
+  const monthLabelEl = document.getElementById('monthLabel');
 
   function showNextMonth() {
-    if (currentIndex >= monthOrder.length) return;
+    if (currentIndex >= monthOrder.length) {
+      monthLabelEl.textContent = ''; // 終了時非表示
+      return;
+    }
 
     const month = monthOrder[currentIndex];
     if (map.getLayer(`extrusion-${month}`)) {
       map.setLayoutProperty(`extrusion-${month}`, 'visibility', 'visible');
     }
 
-    // 回転：10度ずつ回す
-    currentBearing += 10;
-    map.rotateTo(currentBearing, { duration: 1000 });
+    monthLabelEl.textContent = monthLabels[month] || month;
 
     currentIndex++;
-    if (currentIndex < monthOrder.length) {
-      setTimeout(showNextMonth, 1000);
-    }
+    setTimeout(showNextMonth, 1000);
   }
 
-  // 一旦すべて非表示にしてから開始
+  // 全レイヤー非表示からスタート
   monthOrder.forEach(m => {
     if (map.getLayer(`extrusion-${m}`)) {
       map.setLayoutProperty(`extrusion-${m}`, 'visibility', 'none');
