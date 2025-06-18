@@ -50,6 +50,23 @@ document.getElementById('getViewBtn').addEventListener('click', () => {
   });
 });
 
+
+document.getElementById('getViewBtn')?.addEventListener('click', () => {
+  const center = map.getCenter();
+  const zoom = map.getZoom();
+  const pitch = map.getPitch();
+  const bearing = map.getBearing();
+
+  const msg = `center: [${center.lng.toFixed(6)}, ${center.lat.toFixed(6)}],\nzoom: ${zoom.toFixed(2)},\npitch: ${pitch.toFixed(1)},\nbearing: ${bearing.toFixed(1)}`;
+  console.log(msg);
+
+  navigator.clipboard.writeText(msg).then(() => {
+    alert('現在の地図設定をクリップボードにコピーしました！\n\n' + msg);
+  }).catch(() => {
+    alert('クリップボードへのコピーに失敗しました。ブラウザの設定をご確認ください。');
+  });
+});
+
 </script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
   <style>
@@ -66,7 +83,7 @@ document.getElementById('getViewBtn').addEventListener('click', () => {
     }
     #legend {
       position: absolute;
-      top: 50%;
+      top: 65%;
       right: 10px;
       transform: translateY(-50%);
       background: rgba(255, 255, 255, 0.95);
@@ -138,7 +155,7 @@ document.getElementById('getViewBtn').addEventListener('click', () => {
       <option value="m03">3月</option>
     </select>
   </label>
-  <button id="getViewBtn">📍現在の地図設定を取得</button>
+  
   
   <label>地図スタイル:
     <select id="styleSelect">
@@ -324,6 +341,23 @@ document.getElementById('getViewBtn').addEventListener('click', () => {
 
   navigator.clipboard.writeText(msg).then(() => {
     alert('現在の地図設定をクリップボードにコピーしました！\n\n' + msg);
+  });
+});
+
+
+document.getElementById('getViewBtn')?.addEventListener('click', () => {
+  const center = map.getCenter();
+  const zoom = map.getZoom();
+  const pitch = map.getPitch();
+  const bearing = map.getBearing();
+
+  const msg = `center: [${center.lng.toFixed(6)}, ${center.lat.toFixed(6)}],\nzoom: ${zoom.toFixed(2)},\npitch: ${pitch.toFixed(1)},\nbearing: ${bearing.toFixed(1)}`;
+  console.log(msg);
+
+  navigator.clipboard.writeText(msg).then(() => {
+    alert('現在の地図設定をクリップボードにコピーしました！\n\n' + msg);
+  }).catch(() => {
+    alert('クリップボードへのコピーに失敗しました。ブラウザの設定をご確認ください。');
   });
 });
 
