@@ -357,7 +357,7 @@ document.getElementById('getViewBtn')?.addEventListener('click', () => {
   navigator.clipboard.writeText(msg).then(() => {
     alert('現在の地図設定をクリップボードにコピーしました！\n\n' + msg);
   }).catch(() => {
-    alert('クリップボードへのコピーに失敗しました。ブラウザの設定をご確認ください。');
+    alert('クリップボードへのコピーに失敗しました。ブラウザの設定をご確認ください。'+ msg );
   });
 });
 
